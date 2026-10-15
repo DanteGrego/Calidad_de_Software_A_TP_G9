@@ -24,12 +24,34 @@ public class TestAsociadoDTO {
 		assertEquals("JoseJuan", dto.getNombre());
 	}
 	@Test
-	public void testSetNombreNull() {
-		try {
-		dto.setNombre(null);
-		fail();
-		}
-		catch(Exception e) { //no se que tan bien esté esto porque el metodo setNombre no lanza excepcion 
-		}
+	public void testSetApellidoValido() {
+		dto.setApellido("Uchija");
+		assertEquals("Uchija", dto.getApellido());
 	}
+	@Test 
+	public void testSetDniValido() {
+		dto.setDni("47149999");
+		assertEquals("47149999", dto.getDni());
+	}	
+	@Test
+	public void testSetCiudadValida() {
+		dto.setCiudad("Mar del plata");
+		assertEquals("Mar del plata", dto.getCiudad());
+	}
+	@Test
+	public void testSetCalleValida() {
+		dto.setCalle("Corrientes");
+		assertEquals("Corrientes", dto.getCalle());
+	}
+	@Test
+	public void testSetNumeroValido() {
+		dto.setNumero(1450);
+		assertEquals(1450, dto.getNumero());
+	}
+	@Test
+	public void testSetTelefonoValido() {
+		dto.setTelefono("2231237654");
+		assertEquals("2231237654",dto.getTelefono());
+	}
+	
 }
