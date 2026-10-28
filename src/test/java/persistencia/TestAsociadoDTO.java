@@ -63,3 +63,4 @@ public class TestAsociadoDTO {
 		dto.setNumero(1);
 		assertEquals(1, dto.getNumero());
 	}
+}
