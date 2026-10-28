@@ -23,6 +23,7 @@ public class TestBaseDeDatosEscenario1 extends BaseIntegracion {
 		assertSame(BaseDeDatos.getInstancia(), BaseDeDatos.getInstancia());
 		assertSame(bd, BaseDeDatos.getInstancia());
 	}
+	// Comentario prueba github
 
 	@Test
 	public void testConexionNoNulaYValida() throws SQLException {
