@@ -24,7 +24,6 @@ import org.junit.jupiter.api.BeforeEach;
  * (si tuvieran el mismo nombre, anularian a los de esta clase y no se ejecutarian)
  * JUnit siempre ejecuta primero el setUp del padre y luego el del hijo, no hay peligro en eso.
  *
- * Portabilidad a JUnit 4: cambiar solo los imports (@BeforeEach -> @Before, @AfterEach -> @After).
  *
  * Requiere MySQL en localhost:3306 con usuario progra_c / progra_c.
  */

@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * ESCENARIO 1 (conexion abierta, tabla con 20 asociados) sobre la clase BaseDeDatos.
- * Para JUnit 4: cambiar imports (Assertions -> Assert, BeforeEach -> Before, Test -> org.junit.Test).
  */
 public class TestBaseDeDatosEscenario1 extends BaseIntegracion {
 
@@ -23,7 +22,6 @@ public class TestBaseDeDatosEscenario1 extends BaseIntegracion {
 		assertSame(BaseDeDatos.getInstancia(), BaseDeDatos.getInstancia());
 		assertSame(bd, BaseDeDatos.getInstancia());
 	}
-	// Comentario prueba github
 
 	@Test
 	public void testConexionNoNulaYValida() throws SQLException {
