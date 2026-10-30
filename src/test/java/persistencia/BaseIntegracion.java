@@ -40,7 +40,6 @@ public abstract class BaseIntegracion {
 	@BeforeEach
 	public void setUpBase() {
 		bd = BaseDeDatos.getInstancia();
-		bd.iniciarBD();
 		dao = new DataAccessObject();
 	}
 
@@ -71,7 +70,8 @@ public abstract class BaseIntegracion {
 	// ================= Helpers de verificacion (JDBC directo, no dependen del DAO) =================
 	// Solo usar con la conexion abierta (escenarios 1 y 2).
 
-	/** Cantidad de filas de la tabla Asociados. */
+	/** Cantidad de filas de la tabla Asociados. 
+	 *Testeado que funciona*/
 	protected int contarFilas() throws SQLException {
 		Connection c = bd.getConexion();
 		PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM Asociados");
@@ -96,7 +96,13 @@ public abstract class BaseIntegracion {
 		return existe;
 	}
 
-	/** Valor de una columna (como String) del asociado con ese DNI, o null si no existe. */
+	/** Valor de una columna (como String) del asociado con ese DNI, o null si no existe. 
+	 * testeado que funciona
+	 * @param dni valor buscado
+	 * @param columna (nombre/apellido/etc...)
+	 * @return
+	 * @throws SQLException
+	 */
 	protected String valorColumna(String dni, String columna) throws SQLException {
 		Connection c = bd.getConexion();
 		PreparedStatement ps = c.prepareStatement("SELECT " + columna + " FROM Asociados WHERE dni = ?");
