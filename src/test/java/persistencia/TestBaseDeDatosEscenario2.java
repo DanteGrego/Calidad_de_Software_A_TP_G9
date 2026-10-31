@@ -49,15 +49,13 @@ public class TestBaseDeDatosEscenario2 extends BaseIntegracion {
     @Test
     public void testConexionSigueValidaConTablaVacia() throws SQLException {
         // Misma propiedad que en escenario 1, pero tras un TRUNCATE
-        assertTrue(bd.getConexion().isValid(2),
-            "La conexion debe seguir valida aunque la tabla este vacia");
+        assertTrue(bd.getConexion().isValid(2), "La conexion debe seguir valida aunque la tabla este vacia");
     }
 
     @Test
     public void testSingletonSigueSiendoMismaInstanciaConTablaVacia() {
         // Misma propiedad que en escenario 1, pero tras un TRUNCATE
-        assertSame(bd, BaseDeDatos.getInstancia(),
-            "Vaciar la tabla no debe recrear el Singleton");
+        assertSame(bd, BaseDeDatos.getInstancia(), "Vaciar la tabla no debe recrear el Singleton");
     }
 
     // ================= Consultas sobre tabla vacia =================
@@ -71,7 +69,6 @@ public class TestBaseDeDatosEscenario2 extends BaseIntegracion {
 
     @Test
     public void testEjecutarConsultaConIdSobreTablaVaciaDevuelveVacio() throws SQLException {
-        // Ejercita la rama id != -1 de ejecutarConsulta sobre tabla vacia
         ResultSet rs = bd.ejecutarConsulta("SELECT * FROM Asociados WHERE id = ?", 1);
         assertFalse(rs.next(), "No debe haber fila con id=1 en tabla vacia");
         rs.close();

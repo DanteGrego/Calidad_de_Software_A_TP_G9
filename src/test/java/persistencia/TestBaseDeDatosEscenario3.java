@@ -40,8 +40,7 @@ public class TestBaseDeDatosEscenario3 extends BaseIntegracion {
 
     @Test
     public void testEscenarioQuedaArmadoConConexionCerrada() throws SQLException {
-        assertTrue(bd.getConexion().isClosed(),
-            "El escenario 3 requiere conexion cerrada");
+        assertTrue(bd.getConexion().isClosed(), "El escenario 3 requiere conexion cerrada");
     }
 
     // ================= cerrarConexion() =================

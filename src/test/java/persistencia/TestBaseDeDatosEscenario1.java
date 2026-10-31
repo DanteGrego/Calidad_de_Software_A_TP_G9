@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 /**
  * ESCENARIO 1 (conexion abierta, tabla con 20 asociados) sobre la clase BaseDeDatos.
  *
- *
  * Para JUnit 4: cambiar imports (Assertions -> Assert, BeforeEach -> @Before,
  * Test -> org.junit.Test).
  */
@@ -44,8 +43,7 @@ public class TestBaseDeDatosEscenario1 extends BaseIntegracion {
     @Test
     public void testCerrarConexionDejaConexionCerrada() throws SQLException {
         bd.cerrarConexion();
-        assertTrue(bd.getConexion().isClosed(),
-            "Tras cerrarConexion(), la conexion debe estar cerrada");
+        assertTrue(bd.getConexion().isClosed(), "Tras cerrarConexion(), la conexion debe estar cerrada");
     }
 
     @Test
@@ -54,8 +52,7 @@ public class TestBaseDeDatosEscenario1 extends BaseIntegracion {
         BaseDeDatos otra = BaseDeDatos.getInstancia();
         // El Singleton NO reabre la conexion: devuelve la misma instancia con conexion cerrada
         assertSame(bd, otra, "Debe ser la misma instancia");
-        assertTrue(otra.getConexion().isClosed(),
-            "El Singleton no reabre la conexion: queda inutilizable hasta resetear la instancia");
+        assertTrue(otra.getConexion().isClosed(), "El Singleton no reabre la conexion: queda inutilizable hasta resetear la instancia");
     }
 
     // ================= iniciarBD() =================
@@ -85,8 +82,7 @@ public class TestBaseDeDatosEscenario1 extends BaseIntegracion {
 
         // Registro 4: la ciudad tiene un espacio inicial en el INSERT del codigo
         // (" Mar del Plata" con espacio). El test documenta ese dato tal cual esta.
-        assertEquals(" Mar del Plata", valorColumna("21842190", "ciudad"),
-            "El semilla del DNI 21842190 tiene un espacio inicial en ciudad (dato del codigo provisto)");
+        assertEquals(" Mar del Plata", valorColumna("21842190", "ciudad"), "El semilla del DNI 21842190 tiene un espacio inicial en ciudad (dato del codigo provisto)");
 
         // Registro 20 (ultimo)
         assertEquals("Adrian",   valorColumna("28293031", "nombre"));

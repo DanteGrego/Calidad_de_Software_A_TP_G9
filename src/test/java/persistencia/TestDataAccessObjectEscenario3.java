@@ -2,6 +2,7 @@ package persistencia;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -61,16 +62,33 @@ public class TestDataAccessObjectEscenario3 extends BaseIntegracion {
 
 	@Test
 	public void testGuardarLanzaSQLException() {
-		fail("Pendiente: guardar un Asociado y esperar SQLException (try / fail / catch)");
+		try {
+			dao.guardar(this.crearAsociado("111000111"));
+			fail("Deberia lanzar SQLException");
+		} catch (SQLException e) {
+			// correcto
+		}
 	}
 
 	@Test
 	public void testActualizarLanzaSQLException() {
-		fail("Pendiente: actualizar un Asociado y esperar SQLException (try / fail / catch)");
+		try {
+			dao.actualizar(this.crearAsociado("111000111"));
+			fail("Deberia lanzar SQLException");
+		} catch (SQLException e) {
+			// correcto
+		}
 	}
 
 	@Test
-	public void testFlujoSeInterrumpeYNoQuedaNadaPersistido() {
-		fail("Pendiente: guardar lanza SQLException; reabrir la conexion y verificar que no hay fila nueva");
+	public void testFlujoSeInterrumpeYNoQuedaNadaPersistido() throws SQLException {
+		//guardar lanza SQLException; reabrir la conexion y verificar que no hay fila nueva
+		try {
+			dao.guardar(this.crearAsociado("111000111"));
+			fail("Deberia lanzar SQLException");
+		} catch (SQLException e) {
+			// correcto
+		}
+		fail("No hay manera de reabrir la conexion y no modificar la tabla de asociados en la base de datos con los metodos provistos");
 	}
 }

@@ -29,12 +29,14 @@ public class TestDataAccessObjectEscenario2 extends BaseIntegracion {
 
 	@Test
 	public void testCargarIdSobreTablaVacia() {
-		fail("Pendiente: decidir comportamiento esperado de cargar(1) sin filas (null o excepcion)");
+		fail("Comportamiento indefinido por el contrato, no especifica si cargar un id inexistente debe lanzar excepcion o devolver null");
+		//lo mismo que antes en escenario 1, cargar id inexistente no esta especificado que debe hacer
 	}
 
 	@Test
-	public void testGuardarEnTablaVaciaCreaUnaFila() {
-		fail("Pendiente: guardar un Asociado y verificar contarFilas() == 1");
+	public void testGuardarEnTablaVaciaCreaUnaFila() throws SQLException {
+		dao.guardar(this.crearAsociado("111000111"));
+		assertEquals(this.contarFilas(), 1);
 	}
 
 	@Test
@@ -44,12 +46,18 @@ public class TestDataAccessObjectEscenario2 extends BaseIntegracion {
 	}
 
 	@Test
-	public void testActualizarSobreTablaVaciaNoInsertaNiFalla() {
-		fail("Pendiente: actualizar un Asociado y verificar que contarFilas() sigue en 0");
+	public void testActualizarSobreTablaVaciaNoInsertaNiFalla() throws SQLException {
+		dao.actualizar(this.crearAsociado("12345678"));
+		assertEquals(this.contarFilas(), 0);
 	}
 
 	@Test
-	public void testGuardarCargarEliminarDesdeCero() {
-		fail("Pendiente: guardar -> cargar(1) -> eliminar -> tabla vacia otra vez");
+	public void testGuardarCargarEliminarDesdeCero() throws SQLException {
+		dao.guardar(this.crearAsociado("111000111"));
+		assertEquals(this.contarFilas(), 1);
+		dao.cargar(1);
+		assertEquals(this.contarFilas(), 1);
+		dao.eliminar("111000111");
+		assertEquals(this.contarFilas(), 0);
 	}
 }

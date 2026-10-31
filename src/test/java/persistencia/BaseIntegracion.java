@@ -10,6 +10,8 @@ import java.sql.Statement;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+import modelo.modeloDominio.personas.asociado.Asociado;
+
 /**
  * Clase base de los tests de integracion. NO tiene @Test propios.
  *
@@ -116,5 +118,9 @@ public abstract class BaseIntegracion {
 	/** DTO de prueba valido con el DNI indicado. */
 	protected AsociadoDTO crearDTO(String dni) {
 		return new AsociadoDTO("Test", "Prueba", dni, "Mar del Plata", "Calle Test", 1, "2230000000");
+	}
+	
+	protected Asociado crearAsociado(String dni) {
+		return new Asociado(crearDTO(dni));
 	}
 }
