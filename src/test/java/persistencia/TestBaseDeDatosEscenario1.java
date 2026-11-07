@@ -160,7 +160,7 @@ public class TestBaseDeDatosEscenario1 extends BaseIntegracion {
     @Test
     public void testEjecutarActualizacionModificaFilaCorrecta() throws SQLException {
         // Constructor: (nombre, apellido, dni, ciudad, calle, numero, telefono)
-        AsociadoDTO dto = new AsociadoDTO("MariaMod", "TemplateMod", "87654321",
+        AsociadoDTO dto = new AsociadoDTO("MariaMod", "TemplateMod", "876543210",
                                           "Mar del Plata", "Calle Nueva", 999, "2230000000");
 
         bd.ejecutarActualizacion(

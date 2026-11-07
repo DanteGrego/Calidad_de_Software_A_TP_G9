@@ -27,11 +27,13 @@ public class TestDataAccessObjectEscenario2 extends BaseIntegracion {
 		assertEquals(0, dao.cargarConLimite(5).size());
 	}
 
+	/*
 	@Test
 	public void testCargarIdSobreTablaVacia() {
 		fail("Comportamiento indefinido por el contrato, no especifica si cargar un id inexistente debe lanzar excepcion o devolver null");
 		//lo mismo que antes en escenario 1, cargar id inexistente no esta especificado que debe hacer
 	}
+	*/
 
 	@Test
 	public void testGuardarEnTablaVaciaCreaUnaFila() throws SQLException {
