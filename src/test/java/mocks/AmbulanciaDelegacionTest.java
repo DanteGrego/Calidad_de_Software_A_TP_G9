@@ -35,6 +35,8 @@ class AmbulanciaDelegacionTest {
 	@BeforeEach
 	void setUp() {
 		ambulancia = new Ambulancia();
+		ambulancia.setOcupado(false);
+		ambulancia.setSimulacionActiva(true);
 		ambulancia.setState(estadoMock);
 	}
     
