@@ -82,4 +82,24 @@ class AmbulanciaDelegacionTest {
 	    verifyNoMoreInteractions(estadoMock);
 	}
 
+	@Test
+	void testVolviendoDelTaller_llamaSolicitudMantenimiento() {
+		
+		ambulancia.volviendoDelTaller();
+		
+		verify(estadoMock, times(1)).SolicitudMantenimiento();
+		
+		verifyNoMoreInteractions(estadoMock);
+	}
+
+	@Test
+	void testRegresarSinPaciente_llamaRetornoClinica() {
+		
+		ambulancia.regresarSinPaciente();
+		
+		verify(estadoMock, times(1)).RetornoClinica();
+		
+		verifyNoMoreInteractions(estadoMock);
+	}
+
 }
