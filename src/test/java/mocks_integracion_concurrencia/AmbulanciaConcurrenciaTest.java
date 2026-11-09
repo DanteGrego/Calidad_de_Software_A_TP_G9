@@ -1,4 +1,4 @@
-package mocks;
+package mocks_integracion_concurrencia;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -48,13 +48,13 @@ class AmbulanciaConcurrenciaTest {
 		hilo.start();
 		Thread.sleep(150);
 
-		assertEquals(Thread.State.WAITING, hilo.getState());
+		assertEquals(Thread.State.WAITING, hilo.getState(), "El hilo debe estar en WAITING mientras la ambulancia está ocupada y la simulación está activa");
 		verifyNoInteractions(estadoMock);
 
 		ambulancia.regresarSinPaciente();
 		hilo.join(1000);
 
-		assertEquals(Thread.State.TERMINATED, hilo.getState());
+		assertEquals(Thread.State.TERMINATED, hilo.getState(), "El hilo debe terminar tras liberar la ambulancia con regresarSinPaciente");
 		verify(estadoMock, times(1)).SolicitudDeTraslado();
 	}
 
@@ -73,12 +73,12 @@ class AmbulanciaConcurrenciaTest {
 		hilo.start();
 		Thread.sleep(150);
 
-		assertEquals(Thread.State.WAITING, hilo.getState());
+		assertEquals(Thread.State.WAITING, hilo.getState(), "El hilo debe estar en WAITING mientras la ambulancia está ocupada y la simulación está activa");
 
 		ambulancia.setSimulacionActiva(false);
 		hilo.join(1000);
 
-		assertEquals(Thread.State.TERMINATED, hilo.getState());
+		assertEquals(Thread.State.TERMINATED, hilo.getState(), "El hilo debe terminar al finalizar la simulacion");
 		verifyNoInteractions(estadoMock);
 	}
 
@@ -97,7 +97,7 @@ class AmbulanciaConcurrenciaTest {
 		hilo.start();
 		hilo.join(1000);
 
-		assertEquals(Thread.State.TERMINATED, hilo.getState());
+		assertEquals(Thread.State.TERMINATED, hilo.getState(), "El hilo no debe bloquearse cuando la simulacion esta desactivada");
 		verifyNoInteractions(estadoMock);
 	}
 
@@ -116,7 +116,7 @@ class AmbulanciaConcurrenciaTest {
 		hilo.start();
 		hilo.join(1000);
 
-		assertEquals(Thread.State.TERMINATED, hilo.getState());
+		assertEquals(Thread.State.TERMINATED, hilo.getState(), "El hilo debe terminar inmediatamente cuando la ambulancia esta libre");
 		verify(estadoMock, times(1)).SolicitudDeTraslado();
 	}
 
@@ -145,23 +145,23 @@ class AmbulanciaConcurrenciaTest {
 		hilo2.start();
 		Thread.sleep(150);
 
-		assertEquals(Thread.State.WAITING, hilo1.getState());
-		assertEquals(Thread.State.WAITING, hilo2.getState());
+		assertEquals(Thread.State.WAITING, hilo1.getState(), "Hilo 1 debe estar en WAITING mientras la ambulancia esta ocupada");
+		assertEquals(Thread.State.WAITING, hilo2.getState(), "Hilo 2 debe estar en WAITING mientras la ambulancia esta ocupada");
 
 		ambulancia.regresarSinPaciente();
 		Thread.sleep(150);
 
 		boolean unoTermino = (hilo1.getState() == Thread.State.TERMINATED && hilo2.getState() == Thread.State.WAITING)
 				|| (hilo2.getState() == Thread.State.TERMINATED && hilo1.getState() == Thread.State.WAITING);
-		assertTrue(unoTermino);
-		assertTrue(ambulancia.isOcupado());
+		assertTrue(unoTermino, "Exactamente uno de los dos hilos debe haber terminado tras liberar la ambulancia una vez");
+		assertTrue(ambulancia.isOcupado(), "La ambulancia debe seguir ocupada porque el hilo que paso la uso");
 
 		ambulancia.regresarSinPaciente();
 		hilo1.join(1000);
 		hilo2.join(1000);
 
-		assertEquals(Thread.State.TERMINATED, hilo1.getState());
-		assertEquals(Thread.State.TERMINATED, hilo2.getState());
+		assertEquals(Thread.State.TERMINATED, hilo1.getState(), "Hilo 1 debe haber terminado tras la segunda liberacion de la ambulancia");
+		assertEquals(Thread.State.TERMINATED, hilo2.getState(), "Hilo 2 debe haber terminado tras la segunda liberacion de la ambulancia");
 	}
 
 	@Test
@@ -178,8 +178,8 @@ class AmbulanciaConcurrenciaTest {
 		ambulancia.verificarYFinalizarSimulacion();
 		ambulancia.regresarSinPaciente();
 
-		assertFalse(ambulancia.isSimulacionActiva());
-		assertFalse(ambulancia.isOcupado());
+		assertFalse(ambulancia.isSimulacionActiva(), "La simulacion debe estar desactivada tras verificarYFinalizarSimulacion");
+		assertFalse(ambulancia.isOcupado(), "La ambulancia debe estar libre tras regresarSinPaciente");
 	}
 
 	@Test
@@ -192,7 +192,7 @@ class AmbulanciaConcurrenciaTest {
 
 		Thread.sleep(100);
 
-		assertTrue(hilo.isAlive());
+		assertTrue(hilo.isAlive(), "El hilo de RetornoAutomatico debe seguir vivo mientras la simulacion esta activa");
 		hilo.interrupt();
 		hilo.join(500);
 		
@@ -208,8 +208,8 @@ class AmbulanciaConcurrenciaTest {
 
 		Thread.sleep(100);
 
-		
-		assertFalse(hilo.isAlive());
+
+		assertFalse(hilo.isAlive(), "El hilo de RetornoAutomatico debe haber terminado cuando la simulacion esta desactivada");
 		
 		hilo.interrupt();
 		hilo.join(500);

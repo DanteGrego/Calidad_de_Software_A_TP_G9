@@ -1,4 +1,4 @@
-package mocks;
+package mocks_integracion_concurrencia;
 
 
 import static org.mockito.Mockito.*;
