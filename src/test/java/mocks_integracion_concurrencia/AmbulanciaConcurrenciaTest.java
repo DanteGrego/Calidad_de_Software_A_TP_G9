@@ -172,7 +172,7 @@ class AmbulanciaConcurrenciaTest {
 		Thread hilo = new Thread(retorno);
 		hilo.start();
 
-		Thread.sleep(1000);
+		Thread.sleep(15000);
 
 		assertTrue(hilo.isAlive(), "El hilo de RetornoAutomatico debe seguir vivo mientras la simulacion esta activa");
 		hilo.interrupt();
