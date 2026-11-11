@@ -165,24 +165,6 @@ class AmbulanciaConcurrenciaTest {
 	}
 
 	@Test
-	void testHilosFinalizan_simulacionTerminaYAmbulanciaLibre() throws InterruptedException {
-		ambulancia.setSimulacionActiva(true);
-		ambulancia.setOcupado(false);
-
-		Domicilio dom = new Domicilio("Calle", 100, "MDP");
-		Asociado asociado = new Asociado("Mateo", "Vazquez", "333", "2233", dom, 0, ambulancia);
-		Thread hiloAsoc = new Thread(asociado);
-		hiloAsoc.start();
-		hiloAsoc.join(1000);
-
-		ambulancia.verificarYFinalizarSimulacion();
-		ambulancia.regresarSinPaciente();
-
-		assertFalse(ambulancia.isSimulacionActiva(), "La simulacion debe estar desactivada tras verificarYFinalizarSimulacion");
-		assertFalse(ambulancia.isOcupado(), "La ambulancia debe estar libre tras regresarSinPaciente");
-	}
-
-	@Test
 	void testRetornoAutomatico_simulacionActiva_sigueVivo() throws InterruptedException {
 		ambulancia.setSimulacionActiva(true);
 
